@@ -1,0 +1,27 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    padding: 20px;
+  }
+  
+  .gridItem {
+    width: 100%;
+    padding-bottom: calc(100% / 5 * 0.5); /* 16x9 aspect ratio */
+    border: 1px dotted #000;
+  }
+  
+
+  .gridItemText {
+    margin-left: 45%;
+    padding-top: 45px;
+  }
+  
+  .houseColor {
+    background-color: #90ee90; /* Light green for houses */
+  }
+  
+  .streetColor {
+    background-color: #add8e6; /* Light blue for streets */
+  }
+  

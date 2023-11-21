@@ -1,0 +1,16 @@
+.connections {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.column {
+  flex: 1;
+  margin: 20px;
+}
+
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

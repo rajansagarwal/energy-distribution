@@ -1,0 +1,64 @@
+File,Text
+index.md,"<p>Working with const int with strings
+```c</p>
+
+<h1>include <stdio.h></h1>
+
+<p>int main(void) {
+    const int i = 10; // cannot directly change the value of i --> constnat not manipulated
+    printf(""%d\n"", i);
+    int *a = &i;
+    *a = 3; // can technically change the value in which it's pointing to (ONLY LOCAL CONSTANTS)
+    printf(""%d\n"", i);
+    return 0;
+}
+```</p>
+
+<h3><code>const</code> vs <code>#define</code></h3>
+
+<p>| <code>const</code>                                                                              | <code>#define</code>                                                                      |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| can only be used to create read-only objects (arrays, structures, pointers, etcc...) | define can be used only for numerical, character or string constants           |
+| constants are subject to scame scope rules as variables                              | constants aren't subject to same scoping rules as variables (apply everywhere) |
+| constants do have a memor address                                                    | macros dont have addresses                                                                              |</p>
+
+<p>The lines <code>const int *p</code> and <code>int *const q</code> are <strong>very</strong> different 
+- declaration <code>const int *p</code> means p is a pointer to a constant int, so cannot modify the integer that points to p
+- <code>p = &amp;i</code> is ok since it reassigns the pointer itself, not the int where it points
+    - it can change the value of the pointer
+    - it cannot change the value in which it points at
+- the line <code>*p = 5</code> throws an error
+- another pointer <code>int *r</code> then <code>r = p</code> will give a warning --> but <code>r = (int *)p</code> has none and <code>*r = 5</code> will execute
+- <code>int *const p</code> cannot modify the actual pointer q so <code>q = p</code> will throw an error</p>
+
+<p>So, if initialized as <code>const int i = 100;</code>, then you can point to <code>i</code> with <code>const int *const c = &amp;i;</code></p>
+
+<h3>String Functions <code>&lt;string.h&gt;</code></h3>
+
+<p><code>size_t strlen(const char *s)</code>;
+- returns the length of string s
+- does not include null characters
+- the keyword <code>const</code> means that <code>strlen</code> should <strong>only</strong> read the string and not mutate
+<code>char *strcpy(char *s0, const char *s1);
+- copies string s1 into s0 and returns s0
+- s0 must have enough room to store s1
+- if not enough room, strcpy will overwrite bits that follow s0 (undefined)
+- why? return.a pointer to make the nest call easier
+</code>char *strncpy(char *s0, const char *s1, size<em>t n);<code>
+- copies the first n characters from s1 to s0
+- null padded if</code>strlen(s1) &lt; n<code>
+- no null characters added to s0
+</code>char *strcat(char *s0, const char *s1);<code>
+- concatenates s1 to s0 and returns s0
+- does not check if enough room in s0
+- two strings should not overlap on same memory
+</code>char *strncat(char *s0, const char *s1, size</em>t n);<code>
+- only concatenates the first n characters from s1 to s0
+- adds null character after
+</code>int strcmp(const char *s0, const char *s1)<code>;
+- compares two strings comparing ASCII values
+- i, the index of the first character in the strings that doesn't match, then
+    - &lt; 0 if</code>s0[i] &lt; s1[i]<code>or all characters up until i are equal but s1 is longer
+    - &gt; 0 if</code>s0[i] &gt; s1[i]<code>or all characters up until i are equal, but s0 is longer
+    - = 0 if</code>s0<code>equals</code>s1`</p>
+"
